@@ -1,5 +1,4 @@
 #include <iostream>
-#include <vector>
 
 using namespace std;
 
@@ -81,20 +80,25 @@ public:
 };
 
 int main() {
+    const int MAX_MANAGERS = 10; // Set the maximum number of managers
+    Manager managers[MAX_MANAGERS];
     int n;
-    vector<Manager> managers;
 
-    cout << "Enter the number of managers: ";
+    cout << "Enter the number of managers (up to " << MAX_MANAGERS << "): ";
     cin >> n;
     cin.ignore(); // Consume newline character
 
+    if (n > MAX_MANAGERS || n <= 0) {
+        cout << "Invalid number of managers. Exiting program.\n";
+        return 1;
+    }
+
     for (int i = 0; i < n; ++i) {
-        Manager manager;
+        Manager& manager = managers[i];
         cout << "\nEnter details for Manager " << i + 1 << ":\n";
         manager.getData();
         manager.getEmployeeData();
         manager.getManagerData();
-        managers.push_back(manager);
     }
 
     double maxSalary = 0;
